@@ -2,7 +2,7 @@
 
 All notable changes to Tylt releases will be documented in this file.
 
-## [v0.0.71] - 2025-08-13
+## [v0.0.1] - 2025-08-13
 
 ### 🎉 Major Features
 - **Complete Agent Stop/Resume Functionality**: Proper pause/resume with instant UI feedback
@@ -48,9 +48,9 @@ All notable changes to Tylt releases will be documented in this file.
 All images are available on DockerHub with both versioned and `latest` tags:
 
 ```bash
-# Pull specific version
+# Pull specific app version
 docker pull gotylt/tylt-sidekick-app-linux:0.0.71
 
-# Pull latest 
+# Pull latest app version 
 docker pull gotylt/tylt-sidekick-app-linux:latest
 ```

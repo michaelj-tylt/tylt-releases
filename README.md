@@ -2,9 +2,9 @@
 
 Official production releases of Tylt - Intelligent Desktop Automation with AI.
 
-## Latest Release: v0.0.71
+## Latest Release: v0.0.1
 
-Complete agent stop/resume functionality and critical bug fixes.
+Initial production release with complete agent stop/resume functionality and critical bug fixes.
 
 ## Quick Start (Production)
 
