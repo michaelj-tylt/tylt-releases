@@ -1,76 +1,100 @@
 # Tylt Releases
 
-This repository contains official releases of the Tylt project.
+Official production releases of Tylt - Intelligent Desktop Automation with AI.
 
-## Latest Release
+## Latest Release: v0.0.71
 
-**v0.0.71** - Complete agent stop/resume functionality and fix critical issues
+Complete agent stop/resume functionality and critical bug fixes.
 
-### Docker Images
+## Quick Start (Production)
 
-**Linux x86_64:**
+### Option 1: Docker Compose (Recommended)
 ```bash
-docker pull gotylt/tylt-sidekick-app-linux:0.0.71
-docker pull gotylt/tylt-sidekick-app-linux:latest
-```
-
-**ARM64 (Mac/Linux):**
-```bash
-docker pull gotylt/tylt-sidekick-app-arm64:0.0.71
-docker pull gotylt/tylt-sidekick-app-arm64:latest
-```
-
-**Windows:**
-```bash
-docker pull gotylt/tylt-sidekick-app-windows:0.0.71
-docker pull gotylt/tylt-sidekick-app-windows:latest
-```
-
-### Quick Start
-
-```bash
-# Run latest release
-docker run -p 6080:6080 -p 3001:3001 gotylt/tylt-sidekick-app-linux:latest
+# Download and run
+curl -O https://raw.githubusercontent.com/michaelj-tylt/tylt-releases/main/docker-compose.yml
+docker-compose up -d
 
 # Access the application
 # Frontend: http://localhost:3001
 # VNC Web: http://localhost:6080
 ```
 
-## Building from Source
-
-### Requirements
-- Docker
-- Git
-
-### Build Scripts
+### Option 2: Direct Docker Run
 ```bash
-# Linux/Mac
-./build/build.sh prod
+# Linux x86_64
+docker run -d --name tylt-sidekick \
+  -p 3001:3001 -p 6080:6080 -p 8000:8000 \
+  -v $(pwd)/user_data:/home/tylt/user_data \
+  -v $(pwd)/logs:/home/tylt/logs \
+  -v $(pwd)/db_data:/data/db \
+  gotylt/tylt-sidekick-app-linux:latest
+
+# ARM64 (Mac/Linux)  
+docker run -d --name tylt-sidekick \
+  -p 3001:3001 -p 6080:6080 -p 8000:8000 \
+  -v $(pwd)/user_data:/home/tylt/user_data \
+  -v $(pwd)/logs:/home/tylt/logs \
+  -v $(pwd)/db_data:/data/db \
+  gotylt/tylt-sidekick-app-arm64:latest
 
 # Windows
-.\build\build.ps1
-
-# Release to DockerHub
-MSASS=sidekick ./build/release.sh 0.0.71
+docker run -d --name tylt-sidekick \
+  -p 3001:3001 -p 6080:6080 -p 8000:8000 \
+  -v %cd%/user_data:/home/tylt/user_data \
+  -v %cd%/logs:/home/tylt/logs \
+  -v %cd%/db_data:/data/db \
+  gotylt/tylt-sidekick-app-windows:latest
 ```
 
-### Run Scripts
-```bash
-# Linux/Mac
-./run.sh
+## Available Images
 
-# Windows  
-.\run.ps1
-```
+| Platform | Image | Size |
+|----------|-------|------|
+| Linux x86_64 | `gotylt/tylt-sidekick-app-linux:0.0.71` | 5.79GB |
+| ARM64 (Mac/Linux) | `gotylt/tylt-sidekick-app-arm64:0.0.71` | 5.79GB |
+| Windows | `gotylt/tylt-sidekick-app-windows:0.0.71` | 5.79GB |
 
-## Architecture
+## Configuration
 
-This follows the **tylt** → **msass** → **environment** structure:
-- **tylt**: Main product
-- **sidekick**: Microsass (multi-tenant service)  
-- **dev/test/prod/stage**: Environment
+1. **Copy environment template:**
+   ```bash
+   curl -O https://raw.githubusercontent.com/michaelj-tylt/tylt-releases/main/.env.example
+   cp .env.example .env
+   ```
+
+2. **Edit `.env` with your settings:**
+   - Add your `ANTHROPIC_API_KEY`
+   - Customize `MSASS` if needed (default: sidekick)
+
+3. **Run with environment:**
+   ```bash
+   docker-compose --env-file .env up -d
+   ```
+
+## Features
+
+- **Computer Use Automation:** Screenshot capture and desktop interaction
+- **AI Chat Integration:** Support for Anthropic, Bedrock, Vertex AI
+- **Task Execution:** Step-by-step workflow automation
+- **Network & JS Inspection:** Debug web applications and network traffic
+- **VNC Access:** Remote desktop control via web browser
+- **Multi-tenant Architecture:** Support for multiple microsass instances
+
+## Ports
+
+- **3001:** Frontend web interface
+- **6080:** VNC web access (noVNC)
+- **8000:** API service
+- **5900:** VNC direct access
+- **27017:** MongoDB database
+
+## Data Persistence
+
+The following directories are mounted for data persistence:
+- `./user_data` - User files and application data
+- `./logs` - Application logs
+- `./db_data` - MongoDB database files
 
 ## Release History
 
-See [Releases](../../releases) for full changelog and download links.
+See [Releases](../../releases) for detailed changelog and download links.

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  tylt-sidekick:
+    image: gotylt/tylt-sidekick-app-linux:latest
+    container_name: tylt-sidekick
+    ports:
+      - "3001:3001"    # Frontend
+      - "6080:6080"    # VNC Web
+      - "8000:8000"    # API
+      - "5900:5900"    # VNC Direct
+      - "27017:27017"  # MongoDB
+    volumes:
+      - ./user_data:/home/tylt/user_data
+      - ./logs:/home/tylt/logs
+      - ./db_data:/data/db
+    environment:
+      - DEV_MODE=false
+      - MSASS=sidekick
+    restart: unless-stopped
+    
+    # Optional: Add specific platform for ARM64 Macs
+    # platform: linux/arm64
+    
+    # Optional: Add environment file
+    # env_file:
+    #   - .env
