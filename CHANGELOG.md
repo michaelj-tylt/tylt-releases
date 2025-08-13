@@ -48,9 +48,9 @@ All notable changes to Tylt releases will be documented in this file.
 All images are available on DockerHub with both versioned and `latest` tags:
 
 ```bash
-# Pull specific app version
-docker pull gotylt/tylt-sidekick-app-linux:0.0.71
-
-# Pull latest app version 
+# Installer always pulls latest
 docker pull gotylt/tylt-sidekick-app-linux:latest
+
+# If you need a specific version
+docker pull gotylt/tylt-sidekick-app-linux:0.0.71
 ```

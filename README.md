@@ -46,13 +46,15 @@ docker run -d --name tylt-sidekick \
   gotylt/tylt-sidekick-app-windows:latest
 ```
 
-## Available Images
+## Available Images (Always Latest)
 
-| Platform | Image | Size |
-|----------|-------|------|
-| Linux x86_64 | `gotylt/tylt-sidekick-app-linux:0.0.71` | 5.79GB |
-| ARM64 (Mac/Linux) | `gotylt/tylt-sidekick-app-arm64:0.0.71` | 5.79GB |
-| Windows | `gotylt/tylt-sidekick-app-windows:0.0.71` | 5.79GB |
+| Platform | Image | Current Version |
+|----------|-------|----------------|
+| Linux x86_64 | `gotylt/tylt-sidekick-app-linux:latest` | 0.0.71 |
+| ARM64 (Mac/Linux) | `gotylt/tylt-sidekick-app-arm64:latest` | 0.0.71 |
+| Windows | `gotylt/tylt-sidekick-app-windows:latest` | 0.0.71 |
+
+**Note:** The installer always pulls `:latest` tags to ensure you get the most current version.
 
 ## Configuration
 
